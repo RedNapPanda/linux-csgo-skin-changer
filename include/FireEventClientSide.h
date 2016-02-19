@@ -1,7 +1,7 @@
 #pragma once
 
 typedef bool(__attribute__ ((thiscall)) *FireEventClientSide)(void*, IGameEvent*);
-FireEventClientSide originalFireEventClientSide = NULL;
+FireEventClientSide originalFireEventClientSide = nullptr;
 
 bool __attribute__ ((fastcall)) FireEventClientSideHook(void* ecx, void* edx, IGameEvent* pEvent) {
 	if(!pEvent) {

@@ -1,7 +1,7 @@
 #pragma once
 
 typedef void(__attribute__ ((thiscall)) *FrameStageNotify)(void*, ClientFrameStage);
-FrameStageNotify originalFrameStageNotify = NULL;
+FrameStageNotify originalFrameStageNotify = nullptr;
 
 void __attribute__ ((fastcall)) FrameStageNotifyHook(void* ecx, void* edx, ClientFrameStage stage) {
 	while(stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START) {

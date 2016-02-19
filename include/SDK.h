@@ -8,11 +8,11 @@ class IVModelInfoClient;
 class IGameEventManager2;
 class IClientEntity;
 
-IBaseClient* g_BaseClient = NULL;
-IVEngineClient* g_EngineClient = NULL;
-IClientList* g_EntityList = NULL;
-IVModelInfoClient* g_ModelInfo = NULL;
-IGameEventManager2* g_GameEventMgr = NULL;
+IBaseClient* g_BaseClient = nullptr;
+IVEngineClient* g_EngineClient = nullptr;
+IClientList* g_EntityList = nullptr;
+IVModelInfoClient* g_ModelInfo = nullptr;
+IGameEventManager2* g_GameEventMgr = nullptr;
 
 #include "Defines.h"
 #include "DataTable.h"

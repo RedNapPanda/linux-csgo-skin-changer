@@ -1,6 +1,6 @@
 #pragma once
 
-RecvVarProxy sequenceProxy = NULL;
+RecvVarProxy sequenceProxy = nullptr;
 
 void setViewModelSequence(const CRecvProxyData* pDataConst, void* pStruct, void* pOut) {
 	CRecvProxyData* pData = const_cast<CRecvProxyData*>(pDataConst);
