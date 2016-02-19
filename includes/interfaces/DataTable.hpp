@@ -33,7 +33,7 @@ private:
 	char pad[2];
 };
 
-typedef void(__attribute__((cdecl)) *RecvVarProxy)(const CRecvProxyData*, void*, void*);
+typedef void(__attribute__ ((cdecl)) *RecvVarProxy)(const CRecvProxyData*, void*, void*);
 
 struct RecvProp {
 	char* pVarName;

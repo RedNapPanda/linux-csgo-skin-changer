@@ -33,10 +33,9 @@
 
 #define randomInt(min, max) (rand() % (max - min + 1) + min);
 
-typedef byte unsigned char;
 typedef void* (*createInterface)(const char* pInterface, int* pReturnCode);
 
-template <typename F> inline F __attribute__((always_inline)) callVirtualFunc(void* pClassBase, int index) {
+template <typename F> inline F __attribute__ ((always_inline)) callVirtualFunc(void* pClassBase, int index) {
 	return (F)((long) *classBase)[index];
 }
 
@@ -54,7 +53,7 @@ public:
 	bool isFakePlayer;
 	bool isHLTV;
 	long customFiles[4];
-	byte filesDownloaded;
+	unsigned char filesDownloaded;
 private:
 	int pad1;
 } playerInfo;

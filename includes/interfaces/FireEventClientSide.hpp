@@ -2,17 +2,17 @@
 
 #include <string.h>
 
-typedef bool(__attribute ((thiscall)) *FireEventClientSide)(void*, IGameEvent*);
+typedef bool(__attribute__ ((thiscall)) *FireEventClientSide)(void*, IGameEvent*);
 FireEventClientSide originalFireEventClientSide = NULL;
 
-bool __attribute ((fastcall)) FireEventClientSideHook(void* ecx, void* edx, IGameEvent* pEvent) {
+bool __attribute__ ((fastcall)) FireEventClientSideHook(void* ecx, void* edx, IGameEvent* pEvent) {
 	if(!pEvent) {
 		return originalFireEventClientSide(ecx, pEvent);
 	}
-	if(!strcmp(pEvent->GetName(), "player_death")) {
+	if(!strcmp(pEvent->getName(), "player_death")) {
 		applyCustomKillIcon(pEvent);
 	}
-	if(!strcmp(pEvent->GetName(), "game_newmap")) {
+	if(!strcmp(pEvent->getName(), "game_newmap")) {
 		if(g_ViewModelCfg.size() >= 1) {
 			g_ViewModelCfg.clear();
 		}
