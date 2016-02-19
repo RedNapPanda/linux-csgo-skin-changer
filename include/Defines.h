@@ -4,6 +4,9 @@
 #include <iostream>
 #include <unistd.h>
 #include <dlfcn.h>
+#include <unordered_map>
+#include <string.h>
+#include <inttypes.h>
 
 #define SEQUENCE_DEFAULT_DRAW 0
 #define SEQUENCE_DEFAULT_IDLE1 1
@@ -33,10 +36,10 @@
 
 #define randomInt(min, max) (rand() % (max - min + 1) + min);
 
-typedef void* (*createInterface)(const char* pInterface, int* pReturnCode);
+typedef void* (*CreateInterface)(const char* pInterface, int* pReturnCode);
 
 template <typename F> inline F __attribute__ ((always_inline)) callVirtualFunc(void* pClassBase, int index) {
-	return (F)((long) *classBase)[index];
+	return (F) ((long*)*(long**)pClassBase)[index];
 }
 
 typedef struct PlayerInfo {

@@ -38,15 +38,15 @@ public:
 	}
 
 		inline long getOwner() {
-			return *(Plong)((long)this + m_hOwner);
+			return *(long*)((long)this + m_hOwner);
 		}
 
 		inline long getWeapon() {
-			return *(Plong)((long)this + m_hWeapon);
+			return *(long*)((long)this + m_hWeapon);
 		}
 
-		inline void SetWeaponModel(const char* fileName, IClient* weapon) {
-			return callVirtualFunction<void(__attribute__ ((thiscall)) *)(void*, const char*, IClient*)>(this, 242)(this, fileName, weapon);
+		inline void setWeaponModel(const char* fileName, IClient* weapon) {
+			return callVirtualFunc<void(__attribute__ ((thiscall)) *)(void*, const char*, IClient*)>(this, 242)(this, fileName, weapon);
 		}
 };
 

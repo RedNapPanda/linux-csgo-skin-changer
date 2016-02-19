@@ -1,7 +1,5 @@
 #pragma once
 
-#include <main.hpp>
-
 typedef void(__attribute__ ((thiscall)) *FrameStageNotify)(void*, ClientFrameStage);
 FrameStageNotify originalFrameStageNotify = NULL;
 

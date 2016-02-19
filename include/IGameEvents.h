@@ -6,8 +6,8 @@ public:
 		return callVirtualFunc<const char*(__attribute__ ((thiscall)) *)(void*)>(this, 1)(this);
 	}
 
-	int getInt(const char* keyName, int default = 0) {
-		return callVirtualFunc<int(__attribute__ ((thiscall)) *)(void*, const char*, int)>(this, 6)(this, keyName, default);
+	int getInt(const char* keyName, int iDefault = 0) {
+		return callVirtualFunc<int(__attribute__ ((thiscall)) *)(void*, const char*, int)>(this, 6)(this, keyName, iDefault);
 	}
 
 	const char* getString(const char* keyName) {
@@ -15,7 +15,7 @@ public:
 	}
 
 	void setString(const char* keyName, const char* value) {
-		return callVirtualFunc<void(__attribute__ ((thiscall)) *)(void*, const char*, const char*)>(this, 15)(this, szKeyName, value);
+		return callVirtualFunc<void(__attribute__ ((thiscall)) *)(void*, const char*, const char*)>(this, 15)(this, keyName, value);
 	}
 };
 

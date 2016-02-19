@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string.h>
-
 typedef bool(__attribute__ ((thiscall)) *FireEventClientSide)(void*, IGameEvent*);
 FireEventClientSide originalFireEventClientSide = NULL;
 

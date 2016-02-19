@@ -1,7 +1,5 @@
 #pragma once
 
-#include <unordered_map>
-
 struct EconomyItemCfg {
 	int itemDefinitionIndex = 0;
 	int fallbackPaintKit = 0;

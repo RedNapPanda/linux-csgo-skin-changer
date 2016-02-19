@@ -15,7 +15,7 @@ inline bool applyCustomSkin(CBaseAttributableItem* pWeapon, int weaponIndex) {
 		*pWeapon->getItemDefinitionIndex() = item.itemDefinitionIndex;
 	}
 	if(item.customName) {
-		sprintf_s(pWeapon->getCustomName(), 32, "%s", item.customName);
+		snprintf(pWeapon->getCustomName(), 32, "%s", item.customName);
 	}
 	*pWeapon->getItemIDHigh() = -1;
 	return true;

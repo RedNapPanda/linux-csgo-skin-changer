@@ -8,4 +8,4 @@ public:
 	RecvTable* pRecvTable;
 	ClientClass* pNext;
 	int classID;
-}
+};
