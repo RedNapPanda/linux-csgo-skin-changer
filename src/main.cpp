@@ -21,14 +21,53 @@ void load(void) {
 	g_ModelInfo = (IVModelInfoClient*)engineFactory("VModelInfoClient004", nullptr);
 	g_GameEventMgr = (IGameEventManager2*)engineFactory("GAMEEVENTSMANAGER002", nullptr);
 
-	std::cout << "Client: " << clientFactory << std::endl;
-	std::cout << "Engine: " << engineFactory << std::endl;
-	
-	std::cout << "BaseClient: " << g_BaseClient << std::endl;
-	std::cout << "EntityList: " << g_EngineClient << std::endl;
-	std::cout << "EngineClient: " << g_EngineClient << std::endl;
-	std::cout << "ModelInfo: " << g_ModelInfo << std::endl;
-	std::cout << "GameEventMgr: " << g_GameEventMgr << std::endl;
+	long** pClientVMT = (long**) g_BaseClient;
+	long** pGameEventMgrVMT = (long**) g_GameEventMgr;
+
+	long* pOriginalClientVMT = *pClientVMT;
+	long* pOriginalGameEventMgrVMT = *pGameEventMgrVMT;
+
+	size_t clientVMTSize = 0;
+	size_t gameEventMgrVMTSize = 0;
+
+	while((long*)pOriginalClientVMT[clientVMTSize]) {
+		++clientVMTSize;
+	}
+	while((long*)pOriginalGameEventMgrVMT[gameEventMgrVMTSize]) {
+		++gameEventMgrVMTSize;
+	}
+	long* pCloneClientVMT = new long[clientVMTSize];
+	long* pCloneGameEventMgrVMT = new long[gameEventMgrVMTSize];
+
+	memcpy(pCloneClientVMT, pOriginalClientVMT, (sizeof(long) * clientVMTSize));
+	memcpy(pCloneGameEventMgrVMT, pOriginalGameEventMgrVMT, (sizeof(long) * gameEventMgrVMTSize));
+
+	pCloneClientVMT[36] = (long) FrameStageNotifyHook;
+	pCloneGameEventMgrVMT[8] = (long) FireEventClientSideHook;
+
+	originalFrameStageNotify = (FrameStageNotify) pOriginalClientVMT[36];
+	originalFireEventClientSide = (FireEventClientSide) pOriginalGameEventMgrVMT[8];
+
+	*pClientVMT = pCloneClientVMT;
+	*pGameEventMgrVMT = pCloneGameEventMgrVMT;
+
+	setSkinConfig();
+	setKillIconConfig();
+	for(ClientClass* pClass = g_BaseClient->getAllClasses(); pClass; pClass = pClass->pNext) {
+		if(!strcmp(pClass->pNetworkName, "CBaseViewModel")) {
+			RecvTable* pClassTable = pClass->pRecvTable;
+			for(int i = 0; i < pClassTable->propCount; ++i) {
+				RecvProp* pProp = &pClassTable->pProps[i];
+				if(!pProp || strcmp(pProp->pVarName, "m_nSequence")) {
+					continue;
+				}
+				sequenceProxy = pProp->proxy;
+				pProp->proxy = (RecvVarProxy) setViewModelSequence;
+				break;
+			}
+			break;
+		}
+	}
 }
 
 void unload(void) {

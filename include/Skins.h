@@ -57,7 +57,7 @@ inline void setModelConfig() {
 	g_ViewModelCfg[nOriginalKnifeT] = "models/weapons/v_knife_survival_bowie.mdl";
 }
 
-inline void setKillIconCfg() {
+inline void setKillIconConfig() {
 	// Define replacement kill icons. (these only apply to you)
 	g_KillIconCfg["knife_default_ct"] = "knife_karambit";
 	g_KillIconCfg["knife_t"] = "knife_survival_bowie";
